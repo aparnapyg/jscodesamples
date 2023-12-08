@@ -14,5 +14,4 @@ var twoSum = function(nums, target) {
             else{  return [i, nums.indexOf(element2)]; }
             }
     }
-
 };
