@@ -9,7 +9,6 @@ var maxProfit = function(prices) {
     for(let i = 0, j = i+1; i < prices.length, j < prices.length; i++, j++){
         if (prices[i] > prices[j]) { continue; }
         profit[i] = prices[j] - prices[i];
-        console.log('profit --:', profit[i]);
         if (profit[i] > 0) { maxProfit += profit[i]; }     
     }
     return maxProfit;
