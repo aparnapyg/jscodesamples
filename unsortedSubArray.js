@@ -3,33 +3,21 @@
  * @return {number}
  */
 var findUnsortedSubarray = function(nums) {
-    let arrayToBeSorted = [];
-    let min = Infinity;
-    let max = -Infinity;
-    let startIdx = 0;
-    let lastIdx = 0;
-    let shouldSubArrayBeSorted = false;
+    let sortedArray = nums.slice().sort((a, b) => a - b);
 
-    if (nums.length === 1 || 0) { return 0; }
-    
-    for(let i = 0; i < nums.length; i++){
-       if (nums[i] < min) { min = nums[i]; startIdx = i+1; }
-    }
+    let startIdx = nums.length - 1;
+    let endIdx = -1;
 
-    for(let i = 0; i < nums.length; i++){
-       if (nums[i] > max) { max = nums[i]; lastIdx = i; }
-    }
-    
-    for(let i = startIdx; i <= lastIdx; i++){
-        if (min > nums[i]) { min = nums[i]; startIdx = i+1; }
-    }
+    for(let i = 0; i < nums.length; i++) {
+        if(nums[i] !== sortedArray[i]) {
+            startIdx = Math.min(startIdx, i);
+            endIdx = Math.max(endIdx, i);
+        };
+    };
 
-    for(let i = lastIdx; i >= startIdx; i--){
-        if (max < nums[i]) { max = nums[i]; lastIdx = i; }
-    }
+    if(endIdx === -1) return 0;
 
-   return Math.abs(lastIdx - startIdx);
-
+    return endIdx - startIdx + 1;
    
 };
 const nums = [1, 2, 3, 4];
