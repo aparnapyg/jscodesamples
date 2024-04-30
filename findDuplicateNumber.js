@@ -9,3 +9,6 @@ var findDuplicate = function(nums) {
        else { return nums[i]; }
     }
 };
+
+const nums = [1,3,4,2,2];
+console.log(findDuplicate(nums));
