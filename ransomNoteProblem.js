@@ -4,26 +4,20 @@
  * @return {boolean}
  */
 var canConstruct = function (ransomNote, magazine) {
-    if (ransomNote.length > magazine.length) { return false; }
+   let map = {};
 
-    // while (i <= magazine.length && j < ransomNote.length) {
-    //     if (magazine.charAt(i) !== ransomNote.charAt(j)) {
-    //         return false;
-    //     }
-    //     else {
-    //         i++;
-    //         j++;
-    //     }
-    // }
-    // return true;
+   for(const c of magazine){
+    map[c] = c in map ? map[c] + 1 : 1
+   }
 
-    let magazineCopy = magazine;
-
-    for (const character of ransomNote) {
-        if (magazineCopy.indexOf(character) !== -1) { 
-            magazineCopy = magazineCopy.replace(character, '');
-        }
-        else {  return false; }
-    }
-    return true;
+   for(const c of ransomNote){
+    if (!(c in map) || (map[c] < 1)) { return false; }
+    map[c]--;
+   }
+   return true;
 };
+
+const ransomNote = 'aa';
+const magazine = 'aba';
+
+console.log(canConstruct(ransomNote, magazine));
